@@ -70,16 +70,6 @@
         </exclusions>
     </dependency>
 
-    <!-- Cloud - Kubernetes -->
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-kubernetes-fabric8-all</artifactId>
-    </dependency>    
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-kubernetes-client-all</artifactId>
-    </dependency>
-
     <!-- Databases - Uses H2 by default -->
     <dependency>
       <groupId>com.h2database</groupId>
