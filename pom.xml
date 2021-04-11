@@ -73,7 +73,7 @@
     <!-- Cloud - Kubernetes -->
     <dependency>
         <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-kubernetes-client-all</artifactId>
+        <artifactId>spring-cloud-starter-kubernetes-client-config</artifactId>
     </dependency>
 
     <!-- Databases - Uses H2 by default -->
