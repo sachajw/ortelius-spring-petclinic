@@ -73,8 +73,7 @@
     <!-- Cloud - Kubernetes -->
     <dependency>
         <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-Kubernetes</artifactId>
-        <version>1.1.8.RELEASE</version>
+        <artifactId>spring-cloud-starter-kubernetes-client-all</artifactId>
     </dependency>
 
     <!-- Databases - Uses H2 by default -->
