@@ -39,29 +39,9 @@ spec:
             - repair
             - migrate
             - info
-          env:
-            - name: FLYWAY_URL
-              value: jdbc:postgresql://postgres:5432/postgres
-            - name: FLYWAY_USER
-              value: admin
-            - name: FLYWAY_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres
-                  key: password
-            - name: FLYWAY_PLACEHOLDER_REPLACEMENT
-              value: "true"
-            - name: FLYWAY_PLACEHOLDERS_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  name: configmap
-                  key: spring.datasource.username
-            - name: FLYWAY_PLACEHOLDERS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: petclinic-secret
-                  key: spring.datasource.password
           volumeMounts:
+            - mountPath: /
+              name: flyway.conf
             - mountPath: /flyway/sql
               name: sql
       volumes:

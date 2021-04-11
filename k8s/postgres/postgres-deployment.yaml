@@ -63,12 +63,12 @@ spec:
           image: postgres:13.2
           env:
             - name: POSTGRES_USER
-              value: admin
+              value: postgres
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres
-                  key: password
+                  name: POSTGRES_PASSWORD
+                  key: postgres
           ports:
             - containerPort: 5432
           volumeMounts:
