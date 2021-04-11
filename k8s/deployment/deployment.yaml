@@ -28,16 +28,17 @@ spec:
             periodSeconds: 10
 
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: petclinic
+  name: petclinic-application
+  namespace: petclinic
   labels:
-    app: petclinic
+    app: petclinic-application
 spec:
-  selector:
-    app: petclinic
   ports:
     - port: 8080
+      targetPort: 8080
       name: http
-  type: NodePort
+  selector:
+    app: petclinic-application

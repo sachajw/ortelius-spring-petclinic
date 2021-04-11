@@ -27,13 +27,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: task-pv-volume
+  name: pv-volume
   labels:
     type: local
 spec:
   storageClassName: local-storage
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -48,6 +48,8 @@ metadata:
 spec:
   serviceName: "postgres"
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: postgres
@@ -71,14 +73,12 @@ spec:
             - containerPort: 5432
           volumeMounts:
             - name: postgredb
-              mountPath: /var/lib/postgresql/data
-              subPath: postgres
+              mountPath: "/var/lib/postgresql/data"
   volumeClaimTemplates:
     - metadata:
         name: postgredb
       spec:
         accessModes: [ "ReadWriteOnce" ]
-        storageClassName: local-storage
         resources:
           requests:
             storage: 1Gi
