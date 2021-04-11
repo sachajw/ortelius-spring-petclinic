@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+  namespace: petclinic
+data:
+  V1_1__create_user.sql: |
+    CREATE USER ${username} WITH
+      LOGIN
+      NOSUPERUSER
+      NOCREATEDB
+      NOCREATEROLE
+      INHERIT
+      NOREPLICATION
+      CONNECTION LIMIT -1
+      ENCRYPTED PASSWORD '${password}';
+  V1_2__create_db.sql: |
+    CREATE DATABASE ${username} WITH
+      OWNER = ${username}
+      ENCODING  = 'UTF8'
+      CONNECTION LIMIT = -1;
+  V1_3__grant_privileges.sql: |
+    GRANT ALL ON DATABASE ${username} TO ${username}
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration-job
+  namespace: petclinic
+spec:
+  template:
+    spec:
+      containers:
+        - name: flyway
+          image: thevestedleopard/flyway-migration:v001
+          args:
+            - info
+            - repair
+            - migrate
+            - info
+          env:
+            - name: FLYWAY_URL
+              value: jdbc:postgresql://postgres:5432/postgres
+            - name: FLYWAY_USER
+              value: admin
+            - name: FLYWAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: password
+            - name: FLYWAY_PLACEHOLDER_REPLACEMENT
+              value: "true"
+            - name: FLYWAY_PLACEHOLDERS_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: spring.datasource.username
+            - name: FLYWAY_PLACEHOLDERS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: petclinic-secret
+                  key: spring.datasource.password
+          volumeMounts:
+            - mountPath: /flyway/sql
+              name: sql
+      volumes:
+        - name: sql
+          configMap:
+            name: postgres-configmap
+      restartPolicy: Never
