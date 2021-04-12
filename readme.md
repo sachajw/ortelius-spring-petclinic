@@ -131,3 +131,13 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 [spring-petclinic-graphql]: https://github.com/spring-petclinic/spring-petclinic-graphql
 [spring-petclinic-kotlin]: https://github.com/spring-petclinic/spring-petclinic-kotlin
 [spring-petclinic-rest]: https://github.com/spring-petclinic/spring-petclinic-rest
+
+
+As you can see, configuration for a TCP check is quite similar to an HTTP check. This example uses both readiness and liveness probes. 
+The kubelet will send the first readiness probe 5 seconds after the container starts. This will attempt to connect to the goproxy container on port 8080. 
+If the probe succeeds, the Pod will be marked as ready. The kubelet will continue to run this check every 10 seconds.
+
+In addition to the readiness probe, this configuration includes a liveness probe. The kubelet will run the first liveness probe 15 seconds after the container starts.
+Similar to the readiness probe, this will attempt to connect to the goproxy container on port 8080. If the liveness probe fails, the container will be restarted.
+
+Thank you Llew Adamson for reaching out and give

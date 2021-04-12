@@ -5,9 +5,9 @@ metadata:
   namespace: petclinic
 type: Opaque
 data:
-  password: bXlzZWNyZXQ=
+  password: MTJQb3N0Z3Jlc0Ah
 
----
+---  
 apiVersion: v1
 kind: Service
 metadata:
@@ -40,6 +40,17 @@ spec:
     path: "/var/lib/postgresql/data"
 
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: petclinic
+data:
+  POSTGRES_DB: petclinic
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: MTJQb3N0Z3Jlc0Ah
+  
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -60,20 +71,24 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:13.2
+          image: postgres:latest
           env:
             - name: POSTGRES_USER
               value: postgres
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: POSTGRES_PASSWORD
-                  key: postgres
+                  name: postgres
+                  key: password
           ports:
             - containerPort: 5432
+          envFrom:
+          - configMapRef:
+              name: postgres-config
           volumeMounts:
             - name: postgredb
               mountPath: "/var/lib/postgresql/data"
+              subPath: postgres
   volumeClaimTemplates:
     - metadata:
         name: postgredb

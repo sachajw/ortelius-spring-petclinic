@@ -1,33 +1,3 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: petclinic
-  namespace: petclinic
-  labels:
-    app: petclinic
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: petclinic
-  template:
-    metadata:
-      labels:
-        app: petclinic
-    spec:
-      containers:
-        - name: petclinic
-          image: thevestedleopard/springboot-docker:latest
-          ports:
-            - containerPort: 8080
-          readinessProbe:
-            exec:
-              command:
-              - "/bin/sh"
-              - "-c"
-              - "curl -f localhost:8080/health"
-
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -42,3 +12,37 @@ spec:
       name: http
   selector:
     app: petclinic-application
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-application
+  namespace: petclinic
+  labels:
+    app: petclinic-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petclinic-application
+  template:
+    metadata:
+      labels:
+        app: petclinic-application
+    spec:
+      containers:
+        - name: petclinic
+          image: thevestedleopard/springboot-docker:latest
+          ports:
+          - containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20

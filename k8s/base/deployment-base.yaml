@@ -7,12 +7,12 @@ metadata:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: configmap
+  name: petclinic-configmap
   namespace: petclinic
 data:
   spring.datasource.username: postgres
   spring.datasource.driver-class-name: org.postgresql.Driver
-  spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic_service
+  spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic
 
 ---
 apiVersion: v1
@@ -22,7 +22,7 @@ metadata:
   namespace: petclinic
 type: Opaque
 data:
-  spring.datasource.password: bXlfc2VydmljZV9wYXNzd29yZA==
+  spring.datasource.password: MTJQb3N0Z3Jlc0Ah
 
 ---
 kind: StorageClass
@@ -31,3 +31,12 @@ metadata:
   name: local-storage
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
+
+---
+apiVersion: getambassador.io/v2
+kind:  Mapping
+metadata:
+  name:  petclinic-application
+spec:
+  prefix: /
+  service: petclinic:8080

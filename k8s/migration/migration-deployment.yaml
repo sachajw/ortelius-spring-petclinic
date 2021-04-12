@@ -1,27 +1,18 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgres-configmap
-  namespace: petclinic
-data:
-  V1_1__create_user.sql: |
-    CREATE USER ${username} WITH
-      LOGIN
-      NOSUPERUSER
-      NOCREATEDB
-      NOCREATEROLE
-      INHERIT
-      NOREPLICATION
-      CONNECTION LIMIT -1
-      ENCRYPTED PASSWORD '${password}';
-  V1_2__create_db.sql: |
-    CREATE DATABASE ${username} WITH
-      OWNER = ${username}
-      ENCODING  = 'UTF8'
-      CONNECTION LIMIT = -1;
-  V1_3__grant_privileges.sql: |
-    GRANT ALL ON DATABASE ${username} TO ${username}
-
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: postgres-configmap
+#  namespace: petclinic
+#data:
+#  V1_grant_privileges.sql: |
+#    GRANT ALL ON DATABASE ${username} TO ${username}
+#  
+#  V2_create_tables.sql: |
+#
+#  V3_alter_tables.sql: |
+#
+#  V4_insert_data.sql: |
+  
 ---
 apiVersion: batch/v1
 kind: Job
@@ -33,19 +24,39 @@ spec:
     spec:
       containers:
         - name: flyway
-          image: thevestedleopard/flyway-migration:v001
+          image: flyway/flyway:latest
           args:
             - info
             - repair
             - migrate
             - info
+          env:
+            - name: FLYWAY_URL
+              value: jdbc:postgresql://postgres:5432/petclinic
+            - name: FLYWAY_USER
+              value: postgres
+            - name: FLYWAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: password
+            - name: FLYWAY_PLACEHOLDER_REPLACEMENT
+              value: "true"
+            - name: FLYWAY_PLACEHOLDERS_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-configmap
+                  key: spring.datasource.username
+            - name: FLYWAY_PLACEHOLDERS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: petclinic-secret
+                  key: spring.datasource.password
           volumeMounts:
-            - mountPath: /
-              name: flyway.conf
             - mountPath: /flyway/sql
               name: sql
       volumes:
         - name: sql
-          configMap:
-            name: postgres-configmap
+#          configMap:
+#            name: postgres-configmap
       restartPolicy: Never

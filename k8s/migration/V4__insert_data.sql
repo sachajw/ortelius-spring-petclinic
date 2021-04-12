@@ -1,5 +1,5 @@
 INSERT INTO
-    owners (name, address, city, telephone, pets)
+    owners.petclinic (name, address, city, telephone, pets)
     
 VALUES
     (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023');
@@ -14,7 +14,7 @@ VALUES
     (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487');
 
 INSERT INTO
-    veterinarians (name, specialties)
+    veterinarians.petclinic (name, specialties)
     
 VALUES
     (1, 'James', 'Carter');
