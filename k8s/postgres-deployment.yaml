@@ -19,8 +19,10 @@ spec:
   ports:
     - port: 5432
       name: postgres
-   selector:
+  clusterIP: None
+  selector:
     app: postgres
+
 ---
 apiVersion: v1
 kind: PersistentVolume

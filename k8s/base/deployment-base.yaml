@@ -32,11 +32,3 @@ metadata:
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 
----
-apiVersion: getambassador.io/v2
-kind:  Mapping
-metadata:
-  name:  petclinic-application
-spec:
-  prefix: /
-  service: petclinic:8080
