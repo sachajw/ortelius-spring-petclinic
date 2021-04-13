@@ -1,8 +1,8 @@
-CREATE TABLE owners.petclinic (
+CREATE TABLE owners (
     id INT NOT NULL PRIMARY KEY
 );
 
-CREATE TABLE vets.petclinic (
+CREATE TABLE vets (
    id INT NOT NULL PRIMARY KEY
 );
 

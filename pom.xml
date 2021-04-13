@@ -3,6 +3,7 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
   <version>2.4.2</version>
@@ -34,6 +35,11 @@
 
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>7.7.3</version>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -123,6 +129,27 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>${flyway.version}</version>
+        <configuration>
+            <sqlMigrationSeparator>__</sqlMigrationSeparator>
+            <locations>
+                <location>filesystem:src/main/resources/flyway/migrations</location>
+            </locations>
+            <url>${database.url}</url>
+            <user>${database.user}</user>
+            <password>${database.password}</password>
+        </configuration>
+        <dependencies>
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.2.19</version>
+            </dependency>
+        </dependencies>
+      </plugin>
       <plugin>
         <groupId>io.spring.javaformat</groupId>
         <artifactId>spring-javaformat-maven-plugin</artifactId>
@@ -313,7 +340,7 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
-
+  
   <profiles>
     <profile>
       <id>m2e</id>
