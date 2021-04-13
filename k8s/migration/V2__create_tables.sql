@@ -1,9 +1,8 @@
-CREATE SCHEMA petclinic;
-CREATE TABLE petclinic.owners (
+CREATE TABLE owners (
     id INT NOT NULL PRIMARY KEY
 );
 
-CREATE TABLE petclinic.vets (
+CREATE TABLE vets (
    id INT NOT NULL PRIMARY KEY
 );
 
