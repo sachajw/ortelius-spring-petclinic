@@ -130,27 +130,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>${flyway.version}</version>
-        <configuration>
-            <sqlMigrationSeparator>__</sqlMigrationSeparator>
-            <locations>
-                <location>filesystem:src/main/resources/flyway/migrations</location>
-            </locations>
-            <url>${database.url}</url>
-            <user>${database.user}</user>
-            <password>${database.password}</password>
-        </configuration>
-        <dependencies>
-            <dependency>
-                <groupId>postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>42.2.19</version>
-            </dependency>
-        </dependencies>
-      </plugin>
-      <plugin>
         <groupId>io.spring.javaformat</groupId>
         <artifactId>spring-javaformat-maven-plugin</artifactId>
         <version>${spring-format.version}</version>
