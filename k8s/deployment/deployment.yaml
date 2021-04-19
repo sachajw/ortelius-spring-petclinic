@@ -9,7 +9,7 @@ spec:
   type: NodePort
   ports:
     - port: 8080
-      nodePort: 30500
+      nodePort: 
       name: http
   selector:
     app: petclinic-application
