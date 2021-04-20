@@ -15,14 +15,20 @@ data:
   spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic
 
 ---
-apiVersion: v1
-nodes:
-- role: control-plane
-  extraPortMappings:
-  - containerPort: 30080
-    hostPort: 8080
-    listenAddress: "0.0.0.0"
-    protocol: TCP
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: petclinic-ingress
+  annotations:
+    kubernetes.io/ingress.class: ambassador
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: petclinic-application
+          servicePort: 8080
 
 ---
 apiVersion: v1
