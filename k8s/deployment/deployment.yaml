@@ -6,6 +6,7 @@ metadata:
   labels:
     app: petclinic-application
 spec:
+  type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
