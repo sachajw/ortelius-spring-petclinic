@@ -8,7 +8,6 @@ data:
   password: MTJQb3N0Z3Jlc0Ah
 
 ---  
-apiVersion: v1
 kind: Service
 metadata:
   name: postgres
