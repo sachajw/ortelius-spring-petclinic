@@ -5,5 +5,5 @@ resources:
   - postgres-configmap.yaml
   - postgres-secret.yaml
   - postgres-service.yaml
-  - postgres-deployment.yaml
   - postgres-persistent-volume.yaml
+  - postgres-deployment.yaml
