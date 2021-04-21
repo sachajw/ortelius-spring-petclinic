@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: petclinic
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flyway
+  name: flyway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: flyway
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: flyway
+    spec:
+      containers:
+        - args:
+            - -url=jdbc:postgresql://postgres:5432/petclinic
+            - -schemas=petclinic
+            - -user=postgres
+            - -password=12Postgres@!
+            - -connectRetries=60
+            - migrate
+          image: flyway/flyway
+          name: flyway
+          resources: {}
+          volumeMounts:
+            - mountPath: /flyway/sql
+              name: flyway-claim0
+      restartPolicy: Always
+      volumes:
+        - name: flyway-claim0
+          persistentVolumeClaim:
+            claimName: flyway-claim0
+status: {}

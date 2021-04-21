@@ -14,20 +14,20 @@ data:
   spring.datasource.driver-class-name: org.postgresql.Driver
   spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic
 
----
-#apiVersion: networking.k8s.io/v1beta1
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petclinic-ingress
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: petclinic-application
-          servicePort: 8080
+#---
+##apiVersion: networking.k8s.io/v1beta1
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: petclinic-ingress
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /
+#        backend:
+#          serviceName: petclinic-application
+#          servicePort: 8080
 
 ---
 apiVersion: v1

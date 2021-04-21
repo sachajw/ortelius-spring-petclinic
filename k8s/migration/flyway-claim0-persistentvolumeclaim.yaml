@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: petclinic
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flyway-claim0
+  name: flyway-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
