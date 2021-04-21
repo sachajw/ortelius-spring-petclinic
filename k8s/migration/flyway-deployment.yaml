@@ -33,7 +33,7 @@ spec:
             - -password=12Postgres@!
             - -connectRetries=60
             - migrate
-          image: thevestedleopard/flyway
+          image: flyway/flyway
           name: flyway
           resources: {}
           volumeMounts:
