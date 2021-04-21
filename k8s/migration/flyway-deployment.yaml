@@ -28,7 +28,7 @@ spec:
       containers:
         - args:
             - -url=jdbc:postgresql://postgres:5432/petclinic
-            - -schemas=petclinic
+            - -schemas=
             - -user=postgres
             - -password=12Postgres@!
             - -connectRetries=60
