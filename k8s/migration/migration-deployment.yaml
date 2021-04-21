@@ -25,7 +25,7 @@ spec:
             - info
           env:
             - name: FLYWAY_URL
-              value: jdbc:postgresql://postgres:5432/petclinic
+              value: jdbc:postgresql://10.1.1.237:5432/petclinic
             - name: FLYWAY_USER
               value: postgres
             - name: FLYWAY_PASSWORD
