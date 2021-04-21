@@ -21,4 +21,3 @@ release.properties
 .idea/
 
 *.log
-flyway.conf
