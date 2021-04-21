@@ -31,7 +31,7 @@ spec:
             - -schemas=petclinic
             - -user=postgres
             - -password=12Postgres@!
-#            - -connectRetries=60
+            - -connectRetries=60
             - migrate
           image: thevestedleopard/flyway
           name: flyway
