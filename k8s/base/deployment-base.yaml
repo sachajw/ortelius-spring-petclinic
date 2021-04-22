@@ -4,17 +4,6 @@ metadata:
   name: petclinic
 
 ---
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: petclinic-configmap
-  namespace: petclinic
-data:
-  spring.datasource.username: postgres
-  spring.datasource.driver-class-name: org.postgresql.Driver
-  spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic
-
----
 apiVersion: networking.k8s.io/v1beta1
 #apiVersion: networking.k8s.io/v1
 kind: Ingress

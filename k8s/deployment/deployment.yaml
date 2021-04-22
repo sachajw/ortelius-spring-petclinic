@@ -16,6 +16,17 @@ spec:
     app: petclinic-application
 
 ---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: petclinic-configmap
+  namespace: petclinic
+data:
+  spring.datasource.username: postgres
+  spring.datasource.driver-class-name: org.postgresql.Driver
+  spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
