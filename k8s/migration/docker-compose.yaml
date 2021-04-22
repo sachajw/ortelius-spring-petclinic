@@ -2,7 +2,7 @@ version: '3'
 services:
   flyway:
     image: flyway/flyway
-    command: -url=jdbc:postgresql://172.17.0.11:5432/petclinic -schemas=petclinic -user=postgres -password=12Postgres@! -connectRetries=60 migrate
+    command: -url=jdbc:postgresql://postgres:5432/petclinic -schemas=petclinic -user=postgres -password=12Postgres@! -connectRetries=60 migrate
     volumes:
       - .:/flyway/sql
     depends_on:
