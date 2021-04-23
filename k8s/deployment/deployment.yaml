@@ -22,9 +22,14 @@ metadata:
   name: petclinic-configmap
   namespace: petclinic
 data:
-  spring.datasource.username: postgres
-  spring.datasource.driver-class-name: org.postgresql.Driver
   spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic
+  spring.datasource.username: postgres
+  spring.datasource.password: 12Postgres@!
+  spring.datasource.driver-class-name: org.postgresql.Driver
+  spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+  spring.jpa.show-sql: "false"
+  spring.jpa.hibernate.ddl-auto: create
+  spring.jpa.open-in-view: "false"
 
 ---
 apiVersion: apps/v1
