@@ -36,3 +36,59 @@ metadata:
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: spring-app-config
+  namespace: petclinic
+  selfLink: /api/v1/namespaces/petclinic/configmaps/spring-app-config
+  uid: 4c4ee3e8-d16f-442a-9626-c96676d95273
+  resourceVersion: '804364'
+  creationTimestamp: '2021-04-27T14:03:47Z'
+  managedFields:
+    - manager: kubectl-create
+      operation: Update
+      apiVersion: v1
+      time: '2021-04-27T14:03:47Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:application.properties': {}
+data:
+  application.properties: |
+    database=h2
+    spring.datasource.schema=classpath*:db/${database}/schema.sql
+    spring.datasource.data=classpath*:db/${database}/data.sql
+
+    # Web
+    spring.thymeleaf.mode=HTML
+
+    # JPA
+    #pring.datasource.url=jdbc:postgresql://postgres:5432/petclinic
+    #pring.datasource.username=postgres
+    #pring.datasource.password=12Postgres@!
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+    spring.jpa.show-sql=true
+    #spring.jpa.hibernate.ddl-auto=none
+    spring.jpa.hibernate.ddl-auto=update
+    spring.jpa.open-in-view=false
+    spring.jpa.properties.hibernate.format_sql=true
+
+    # Internationalization
+    spring.messages.basename=messages/messages
+
+    # Actuator
+    management.endpoints.web.exposure.include=*
+
+    # Logging
+    logging.level.org.springframework=INFO
+    # logging.level.org.springframework.web=DEBUG
+    # logging.level.org.springframework.context.annotation=TRACE
+
+    # Maximum time static resources should be cached
+    spring.resources.cache.cachecontrol.max-age=12h
+
+
