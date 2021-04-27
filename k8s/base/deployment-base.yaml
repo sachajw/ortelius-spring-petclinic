@@ -58,9 +58,9 @@ metadata:
           'f:application.properties': {}
 data:
   application.properties: |
-#    database=h2
-#    spring.datasource.schema=classpath*:db/${database}/schema.sql
-#    spring.datasource.data=classpath*:db/${database}/data.sql
+    database=h2
+    spring.datasource.schema=classpath*:db/${database}/schema.sql
+    spring.datasource.data=classpath*:db/${database}/data.sql
 
     # Web
     spring.thymeleaf.mode=HTML
