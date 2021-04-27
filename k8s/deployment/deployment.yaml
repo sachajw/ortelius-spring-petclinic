@@ -22,14 +22,16 @@ metadata:
   name: petclinic-configmap
   namespace: petclinic
 data:
-  spring.datasource.url: jdbc:postgresql://postgres:5432/petclinic
+  spring.datasource.url.jdbc:postgresql://postgres:5432/petclinic
   spring.datasource.username: postgres
   spring.datasource.password: 12Postgres@!
   spring.datasource.driver-class-name: org.postgresql.Driver
   spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
-  spring.jpa.show-sql: "false"
-  spring.jpa.hibernate.ddl-auto: none
+  spring.jpa.show-sql: "true"
+#  spring.jpa.hibernate.ddl-auto: none
+  spring.jpa.hibernate.ddl-auto: update
   spring.jpa.open-in-view: "false"
+  spring.jpa.properties.hibernate.format_sql: "true"
 
 ---
 apiVersion: apps/v1
@@ -64,3 +66,4 @@ spec:
               port: 8080
             initialDelaySeconds: 15
             periodSeconds: 20
+
