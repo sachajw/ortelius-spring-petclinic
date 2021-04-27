@@ -1,8 +1,7 @@
-kind: Namespace
 apiVersion: v1
+kind: Namespace
 metadata:
   name: petclinic
-
 ---
 apiVersion: networking.k8s.io/v1beta1
 #apiVersion: networking.k8s.io/v1 Ingress
@@ -13,11 +12,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: petclinic-application
           servicePort: 8080
-
+        path: /
 ---
 apiVersion: v1
 kind: Secret
@@ -27,35 +25,33 @@ metadata:
 type: Opaque
 data:
   spring.datasource.password: MTJQb3N0Z3Jlc0Ah
-
 ---
-kind: StorageClass
 apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
   name: local-storage
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
-
 ---
-kind: ConfigMap
 apiVersion: v1
+kind: ConfigMap
 metadata:
   name: spring-app-config
   namespace: petclinic
-  selfLink: /api/v1/namespaces/petclinic/configmaps/spring-app-config
-  uid: 4c4ee3e8-d16f-442a-9626-c96676d95273
-  resourceVersion: '804364'
   creationTimestamp: '2021-04-27T14:03:47Z'
   managedFields:
-    - manager: kubectl-create
-      operation: Update
-      apiVersion: v1
-      time: '2021-04-27T14:03:47Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:data':
-          .: {}
-          'f:application.properties': {}
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      'f:data':
+        .: {}
+        'f:application.properties': {}
+    manager: kubectl-create
+    operation: Update
+    time: '2021-04-27T14:03:47Z'
+  resourceVersion: '804364'
+  selfLink: /api/v1/namespaces/petclinic/configmaps/spring-app-config
+  uid: 4c4ee3e8-d16f-442a-9626-c96676d95273
 data:
   application.properties: |
     database=h2
@@ -90,5 +86,3 @@ data:
 
     # Maximum time static resources should be cached
     spring.resources.cache.cachecontrol.max-age=12h
-
-
