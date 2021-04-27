@@ -7,14 +7,13 @@ metadata:
     app: petclinic-application
 spec:
   type: NodePort
-  ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30007
-      name: http
   selector:
     app: petclinic-application
-
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 30007
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,28 +33,33 @@ spec:
         app: petclinic-application
     spec:
       containers:
-        - name: petclinic
-          image: thevestedleopard/springboot-docker:latest
-          ports:
-          - containerPort: 8080
-          volumeMounts:
-          - mountPath: /src/main/resources/application.properties
-            name: application-config
-            readOnly: true
+      - env:
+        - name:
+          valueFrom:
+            configMapKeyRef:
+              name: spring-app-config
+        volumeMounts:
+        - name: application-config
+          readOnly: true
+          mountPath: /src/main/resources/application.properties
+      - name: petclinic
+        image: thevestedleopard/springboot-docker:latest
+        ports:
+        - containerPort: 8080
       volumes:
       - name: application-config
       configMap:
         name: spring-app-config
         items:
-        - key: application.properties
-          path: application.properties
-          readinessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            tcpSocket:
-              port: 8080
+        - livenessProbe:
             initialDelaySeconds: 15
             periodSeconds: 20
+            tcpSocket:
+              port: 8080
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            tcpSocket:
+              port: 8080
+          key: application.properties
+          path: application.properties
