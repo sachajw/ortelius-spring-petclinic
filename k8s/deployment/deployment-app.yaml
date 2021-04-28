@@ -16,7 +16,7 @@ spec:
     - # Define the environment variable
       name: SPRING_APP_CONFIG # the case is different here from the key name in the configmap
       valueFrom:
-      configMapKRef:
+      configMapRef:
         name: spring-app-config # the configmap this value comes from
         key: application.properties # the key to fetch
     volumeMounts:
