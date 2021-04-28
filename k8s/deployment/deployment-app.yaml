@@ -40,12 +40,13 @@ spec:
     - name: application-config
       mountPath: "/src/main/resources/application.properties"
       readOnly: true
-volumes:
-  # set volumes at the pod level, then mount them into the containers inside that pod
-  - name: application-config
-    configMap:
-      # provide the name of the configmap you want to mount
-      name: spring-app-config
-      # an arra of keys from the configmap to create as files
-      items:
-        -key: "application.properties"
+  volumes:
+    # set volumes at the pod level, then mount them into the containers inside that pod
+    - name: application-config
+      configMap:
+        # provide the name of the configmap you want to mount
+        name: spring-app-config
+        # an arra of keys from the configmap to create as files
+        items:
+          -key: "application.properties"
+  
