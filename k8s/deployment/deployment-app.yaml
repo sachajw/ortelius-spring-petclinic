@@ -48,5 +48,5 @@ spec:
         name: spring-app-config
         # an arra of keys from the configmap to create as files
         items:
-          -key: "application.properties"
-  
+          - key: "application.properties"
+            path: "application.properties"
