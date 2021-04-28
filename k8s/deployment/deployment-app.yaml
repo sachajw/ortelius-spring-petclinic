@@ -26,27 +26,27 @@ spec:
   containers:
   - name: petclinic-app
     image: thevestedleopard/springboot-docker:latest
-    ports:
-      - containerPort: 8080
     command: ["sleep", "3600"]
+    ports:
+    - containerPort: 8080
     env:
-      # Define the environment variable
-      - name: SPRING_APP_CONFIG # the case is different here from the key name in the configmap
-        valueFrom:
-        configMapKeyRef:
-          name: spring-app-config # the configmap this value comes from
-          key: application.properties # the key to fetch
+    - # Define the environment variable
+      name: SPRING_APP_CONFIG # the case is different here from the key name in the configmap
+      valueFrom:
+      configMapKeyRef:
+        name: spring-app-config # the configmap this value comes from
+        key: application.properties # the key to fetch
     volumeMounts:
     - name: application-config
-      mountPath: "/src/main/resources/application.properties"
       readOnly: true
+      mountPath: "/src/main/resources/application.properties"
   volumes:
-    # set volumes at the pod level, then mount them into the containers inside that pod
-    - name: application-config
-      configMap:
-        # provide the name of the configmap you want to mount
-        name: spring-app-config
-        # an arra of keys from the configmap to create as files
-        items:
-          - key: "application.properties"
-            path: "application.properties"
+  # set volumes at the pod level, then mount them into the containers inside that pod
+  - name: application-config
+    configMap:
+      # provide the name of the configmap you want to mount
+      name: spring-app-config
+      # an arra of keys from the configmap to create as files
+      items:
+      - key: "application.properties"
+        path: "application.properties"
