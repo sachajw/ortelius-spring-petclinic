@@ -31,7 +31,7 @@ spec:
     command: ["sleep", "3600"]
     env:
       # Define the environment variable
-      - name: SPRING-APP-CONFIG # the case is different here from the key name in the configmap
+      - name: SPRING_APP_CONFIG # the case is different here from the key name in the configmap
         valueFrom:
         configMapKeyRef:
           name: spring-app-config # the configmap this value comes from
