@@ -9,7 +9,7 @@ spec:
   containers:
   - name: petclinic-app
     image: thevestedleopard/springboot-docker:latest
-    command: ["sleep", "3600"]
+#    command: ["sleep", "3600"]
     ports:
     - containerPort: 8080
     env:
