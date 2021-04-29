@@ -54,6 +54,10 @@ metadata:
   uid: 4c4ee3e8-d16f-442a-9626-c96676d95273
 data:
   application.properties: |
+    database=h2
+    spring.datasource.schema=classpath*:db/${database}/schema.sql
+    spring.datasource.data=classpath*:db/${database}/data.sql
+
     # Web
     spring.thymeleaf.mode=HTML
 
