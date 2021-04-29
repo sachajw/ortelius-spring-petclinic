@@ -5,4 +5,4 @@ CMD apk add postgresql-client -y
 
 COPY ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java", "-jar", "app.jar --spring.config.location=application.properties"]
+ENTRYPOINT ["java", "-jar", "app.jar --spring.config.location=file:///application.properties"]
