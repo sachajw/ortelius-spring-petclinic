@@ -16,6 +16,7 @@ spec:
           serviceName: petclinic-application
           servicePort: 8080
         path: /
+        
 ---
 apiVersion: v1
 kind: Secret
@@ -32,6 +33,7 @@ metadata:
   name: local-storage
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
+
 ---
 apiVersion: v1
 kind: ConfigMap

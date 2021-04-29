@@ -22,7 +22,7 @@ spec:
     volumeMounts:
     - name: application-config
       readOnly: true
-      mountPath: "/src/main/resources/application.properties"
+      mountPath: "application.properties"
   volumes:
   # set volumes at the pod level, then mount them into the containers inside that pod
   - name: application-config
