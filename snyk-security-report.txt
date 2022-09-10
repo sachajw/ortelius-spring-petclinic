@@ -1,0 +1,284 @@
+
+Testing java-docker...
+
+✗ Low severity vulnerability found in openssl/libcrypto1.1
+  Description: Inadequate Encryption Strength
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1075739
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1j-r0
+
+✗ Medium severity vulnerability found in openssl/libcrypto1.1
+  Description: NULL Pointer Dereference
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1051931
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1i-r0
+
+✗ Medium severity vulnerability found in openssl/libcrypto1.1
+  Description: NULL Pointer Dereference
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1075737
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1j-r0
+
+✗ Medium severity vulnerability found in openssl/libcrypto1.1
+  Description: NULL Pointer Dereference
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1089241
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1k-r0
+
+✗ Medium severity vulnerability found in musl/musl
+  Description: Out-of-bounds Write
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-MUSL-1042763
+  Introduced through: musl/musl@1.1.24-r2, busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, zlib/zlib@1.2.11-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0, busybox/ssl_client@1.31.1-r9, gcc/libgcc@9.2.0-r4, musl/musl-utils@1.1.24-r2, pax-utils/scanelf@1.2.4-r0, libc-dev/libc-utils@0.7.2-r0
+  From: musl/musl@1.1.24-r2
+  From: busybox/busybox@1.31.1-r9 > musl/musl@1.1.24-r2
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > musl/musl@1.1.24-r2
+  and 11 more...
+  Fixed in: 1.1.24-r3
+
+✗ Medium severity vulnerability found in busybox/busybox
+  Description: Out-of-bounds Read
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920721
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in openssl/libcrypto1.1
+  Description: Integer Overflow or Wraparound
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1075738
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1j-r0
+
+✗ High severity vulnerability found in openssl/libcrypto1.1
+  Description: Improper Certificate Validation
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1089242
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1k-r0
+
+✗ High severity vulnerability found in openssl/libcrypto1.1
+  Description: Out-of-bounds Read
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1569447
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1l-r0
+
+✗ High severity vulnerability found in openssl/libcrypto1.1
+  Description: NULL Pointer Dereference
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-587980
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1g-r0
+
+✗ High severity vulnerability found in gcc/libgcc
+  Description: Insufficient Entropy
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-GCC-598616
+  Introduced through: gcc/libgcc@9.2.0-r4, glibc/glibc-bin@2.31-r0
+  From: gcc/libgcc@9.2.0-r4
+  From: glibc/glibc-bin@2.31-r0 > gcc/libgcc@9.2.0-r4
+  Fixed in: 9.3.0-r0
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Improper Handling of Exceptional Conditions
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1090152
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r10
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920714
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920716
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920723
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920724
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920740
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920741
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920749
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920753
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in busybox/busybox
+  Description: Use After Free
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-BUSYBOX-1920756
+  Introduced through: busybox/busybox@1.31.1-r9, alpine-baselayout/alpine-baselayout@3.2.0-r3, glibc/glibc-bin@2.31-r0, busybox/ssl_client@1.31.1-r9
+  From: busybox/busybox@1.31.1-r9
+  From: alpine-baselayout/alpine-baselayout@3.2.0-r3 > busybox/busybox@1.31.1-r9
+  From: glibc/glibc-bin@2.31-r0 > busybox/busybox@1.31.1-r9
+  and 1 more...
+  Fixed in: 1.31.1-r11
+
+✗ High severity vulnerability found in apk-tools/apk-tools
+  Description: Out-of-bounds Read
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-APKTOOLS-1246343
+  Introduced through: apk-tools/apk-tools@2.10.4-r3
+  From: apk-tools/apk-tools@2.10.4-r3
+  Fixed in: 2.10.6-r0
+
+✗ Critical severity vulnerability found in zlib/zlib
+  Description: Out-of-bounds Write
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-ZLIB-2977081
+  Introduced through: zlib/zlib@1.2.11-r3, apk-tools/apk-tools@2.10.4-r3
+  From: zlib/zlib@1.2.11-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > zlib/zlib@1.2.11-r3
+  Fixed in: 1.2.11-r4
+
+✗ Critical severity vulnerability found in openssl/libcrypto1.1
+  Description: Buffer Overflow
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-OPENSSL-1569451
+  Introduced through: openssl/libcrypto1.1@1.1.1d-r3, openssl/libssl1.1@1.1.1d-r3, apk-tools/apk-tools@2.10.4-r3, libtls-standalone/libtls-standalone@2.9.1-r0
+  From: openssl/libcrypto1.1@1.1.1d-r3
+  From: openssl/libssl1.1@1.1.1d-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  From: apk-tools/apk-tools@2.10.4-r3 > openssl/libcrypto1.1@1.1.1d-r3
+  and 4 more...
+  Fixed in: 1.1.1l-r0
+
+✗ Critical severity vulnerability found in apk-tools/apk-tools
+  Description: Out-of-bounds Read
+  Info: https://security.snyk.io/vuln/SNYK-ALPINE311-APKTOOLS-1534687
+  Introduced through: apk-tools/apk-tools@2.10.4-r3
+  From: apk-tools/apk-tools@2.10.4-r3
+  Fixed in: 2.10.7-r0
+
+
+
+Package manager:   apk
+Project name:      docker-image|java-docker
+Docker image:      java-docker
+Platform:          linux/amd64
+Base image:        alpine:3.11.5
+
+Tested 17 dependencies for known vulnerabilities, found 25 vulnerabilities.
+
+Base Image     Vulnerabilities  Severity
+alpine:3.11.5  24               3 critical, 15 high, 5 medium, 1 low
+
+Recommendations for base image upgrade:
+
+Minor upgrades
+Base Image   Vulnerabilities  Severity
+alpine:3.13  0                0 critical, 0 high, 0 medium, 0 low
+
+Alpine 3.11.5 is no longer supported by the Alpine maintainers. Vulnerability detection may be affected by a lack of security updates.
+
+For more free scans that keep your images secure, sign up to Snyk at https://dockr.ly/3ePqVcp
+
+-------------------------------------------------------
+
+Testing java-docker...
+
+Package manager:   maven
+Target file:       /opt/java/openjdk/lib
+Project name:      java-docker:latest:/opt/java/openjdk/lib
+Docker image:      java-docker
+
+✔ Tested java-docker for known vulnerabilities, no vulnerable paths found.
+
+For more free scans that keep your images secure, sign up to Snyk at https://dockr.ly/3ePqVcp
+
+
+Tested 2 projects, 1 contained vulnerable paths.
+
+
+
