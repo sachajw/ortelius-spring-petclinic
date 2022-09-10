@@ -357,7 +357,7 @@
                       <pluginExecutionFilter>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
-                        <versionRange>2.6.2</versionRange>
+                        <versionRange>2.7.3</versionRange>
                         <goals>
                           <goal>build-info</goal>
                         </goals>
