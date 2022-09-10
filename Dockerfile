@@ -1,6 +1,5 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-ARG JAR_FILE=target/spring-petclinic-2.4.2.jar
-COPY ${JAR_FILE} spring-petclinic-2.4.2.jar
+COPY target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/spring-petclinic-2.4.2.jar --spring.config.location=file:///application.properties"]
+ENTRYPOINT ["java","-jar","/app.jar --spring.config.location=file:///application.properties"]
