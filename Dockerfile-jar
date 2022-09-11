@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
-ARG JAVA_OPTS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+#ARG JAVA_OPTS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 VOLUME /tmp
 COPY target/*.jar /app.jar
 EXPOSE 8080:8080
-ENTRYPOINT ["java","${JAVA_OPTS}","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
