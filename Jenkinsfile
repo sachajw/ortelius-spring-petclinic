@@ -1,5 +1,3 @@
-@Library('jenkins-shared-library@master') _
-
 pipeline {
     environment {
         DOCKERREPO = "quay.io/pangarabbit/ortelius-spring-petclinic"
