@@ -47,15 +47,6 @@ pipeline {
     }
 
     stages {
-        stage('Git Checkout') {
-            steps {
-                gitCheckout(
-                    branch: 'master',
-                    url: 'https://github.com/sachajw/ortelius-spring-petclinic.git'
-                )
-            }
-        }
-
         stage('Git Committer') {
             steps {
                 container("${PYTHON_CONTAINER}") {
@@ -69,6 +60,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Git Checkout') {
+            steps {
+                gitCheckout(
+                    branch: 'master',
+                    url: 'https://github.com/sachajw/ortelius-spring-petclinic.git'
+                )
+            }
+        }
+
 
         stage('Surefire Report') {
             steps {
