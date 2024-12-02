@@ -11,6 +11,7 @@ pipeline {
         DHPROJECT = 'ortelius-jenkins-demo-app'
         DHURL = 'https://ortelius.pangarabbit.com'
         DISCORD = credentials('pangarabbit-discord-jenkins')
+        SAFE_DIR = '${env.WORKSPACE}'
         REPORT_DIR = "${env.JENKINS_HOME}/reports"
     }
 
@@ -29,15 +30,25 @@ pipeline {
                   - name: maven39
                     image: maven:3.9.9-amazoncorretto-8
                     args: []
+                    command:
+                      - /bin/sh
+                      - -c
+                      - >
+                          git config --global --add safe.directory ${SAFE_DIR} && sleep 99d
                     securityContext:
                       privileged: true
-                    securityContext:
-                      privileged: true
+                    tty: true
                   - name: python39
                     image: python:3.9-slim
                     args: []
+                    command:
+                      - /bin/sh
+                      - -c
+                      - >
+                          git config --global --add safe.directory ${SAFE_DIR} && sleep 99d
                     securityContext:
                       privileged: true
+                    tty: true
                 restartPolicy: Always
             '''
         }
@@ -53,20 +64,20 @@ pipeline {
             }
         }
 
-        stage('Git Committer') {
-            steps {
-                echo 'Identifying Git Committer'
-                container('python39') {
-                    script {
-                        sh 'git config --global --add safe.directory ${WORKSPACE}'
-                        env.GIT_COMMIT_USER = sh(
-                            script: "git log -1 --pretty=format:'%an'",
-                            returnStdout: true
-                        ).trim()
-                    }
-                }
-            }
-        }
+        // stage('Git Committer') {
+        //     steps {
+        //         echo 'Identifying Git Committer'
+        //         container('python39') {
+        //             script {
+        //                 sh 'git config --global --add safe.directory ${WORKSPACE}'
+        //                 env.GIT_COMMIT_USER = sh(
+        //                     script: "git log -1 --pretty=format:'%an'",
+        //                     returnStdout: true
+        //                 ).trim()
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Surefire Report') {
             steps {
