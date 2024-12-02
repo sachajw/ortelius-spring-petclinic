@@ -68,7 +68,6 @@ pipeline {
                     }
                 }
             }
-        }
 
         stage('Surefire Report') {
             steps {
