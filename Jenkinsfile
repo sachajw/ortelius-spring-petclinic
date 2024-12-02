@@ -88,7 +88,7 @@ pipeline {
                         pip install ortelius-cli
                         rm -rf docker-hello-world-spring-boot
                         git clone https://github.com/dstar55/docker-hello-world-spring-boot
-                        cd docker-hello-world-spring-boot
+                        cd ortelius-spring-petclinic
                         dh envscript --envvars component.toml --envvars_sh ${WORKSPACE}/dhenv.sh
 
                         echo Logging into Docker
