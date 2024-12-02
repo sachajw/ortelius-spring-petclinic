@@ -46,7 +46,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Git Checkout'
-                script {
+                container('python39') {
                     withCredentials([string(credentialsId: 'gh-sachajw-walle-secret-text', variable: 'GITHUB_PAT')]) {
                         sh 'git clone https://${GITHUB_PAT}@github.com/sachajw/ortelius-spring-petclinic.git'
                     }
@@ -56,7 +56,8 @@ pipeline {
 
         stage('Git Committer') {
             steps {
-                echo 'Identifying Git Committer' {
+                echo 'Identifying Git Committer'
+                container('python39') {
                     script {
                         sh 'git config --global --add safe.directory ${WORKSPACE}'
                         env.GIT_COMMIT_USER = sh(
