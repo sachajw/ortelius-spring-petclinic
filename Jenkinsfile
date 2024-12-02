@@ -19,7 +19,7 @@ pipeline {
               kind: Pod
               metadata:
                 name: build-pod
-                namespace: infrastructure
+                namespace: app
                 labels:
                   app: build-pod
               spec:
