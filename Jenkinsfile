@@ -36,6 +36,11 @@ pipeline {
                       - >
                           git config --global --add safe.directory ${SAFE_DIR} && sleep 99d
                     tty: true
+                  - name: kaniko
+                    image: gcr.io/kaniko-project/executor:debug
+                    command:
+                    - /busybox/sh
+                    tty: true
                 restartPolicy: Always
             """
         }
