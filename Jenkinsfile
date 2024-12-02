@@ -1,4 +1,7 @@
 pipeline {
+    agent {
+        label 'jenkins-jenkins-agent'
+    }
     environment {
         DOCKERREPO = "quay.io/pangarabbit/ortelius-spring-petclinic"
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
@@ -7,31 +10,6 @@ pipeline {
         PYTHON_CONTAINER = 'python39'
         MAVEN_CONTAINER = 'maven39'
         KANIKO_CONTAINER = 'kaniko'
-    }
-
-    agent {
-        kubernetes {
-            yaml """
-              apiVersion: v1
-              kind: Pod
-              metadata:
-                name: build-pod
-              spec:
-                containers:
-                  - name: maven39
-                    image: maven:3.9.9-amazoncorretto-8
-                    tty: true
-                  - name: python39
-                    image: python:3.9-slim
-                    tty: true
-                  - name: kaniko
-                    image: gcr.io/kaniko-project/executor:latest
-                    command:
-                    - /busybox/sh
-                    tty: true
-                restartPolicy: Always
-            """
-        }
     }
 
     stages {
