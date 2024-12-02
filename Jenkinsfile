@@ -1,3 +1,5 @@
+@Library('jenkins-shared-library@master') _
+
 pipeline {
     environment {
         QUAYUSER = credentials('quay-pangarabbit')
@@ -42,14 +44,12 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Git Checkout') {
             steps {
-                echo 'Git Checkout'
-                container('python39') {
-                    withCredentials([string(credentialsId: 'gh-sachajw-walle-secret-text', variable: 'GITHUB_PAT')]) {
-                        sh 'git clone https://${GITHUB_PAT}@github.com/sachajw/ortelius-spring-petclinic.git'
-                    }
-                }
+                gitCheckout(
+                    branch: 'main',
+                    url: 'https://github.com/sachajw/ortelius-spring-petclinic.git'
+                )
             }
         }
 
