@@ -49,11 +49,9 @@ pipeline {
                 gitCheckout(
                     branch: 'main',
                     url: 'https://github.com/sachajw/ortelius-spring-petclinic.git'
-                    )
-                }
+                )
             }
         }
-    }
 
         stage('Git Committer') {
             steps {
