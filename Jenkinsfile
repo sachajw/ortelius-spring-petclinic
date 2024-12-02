@@ -63,21 +63,21 @@ pipeline {
                 )
             }
         }
-
-        // stage('Git Committer') {
-        //     steps {
-        //         echo 'Identifying Git Committer'
-        //         container('python39') {
-        //             script {
-        //                 sh 'git config --global --add safe.directory ${WORKSPACE}'
-        //                 env.GIT_COMMIT_USER = sh(
-        //                     script: "git log -1 --pretty=format:'%an'",
-        //                     returnStdout: true
-        //                 ).trim()
-        //             }
-        //         }
-        //     }
-        // }
+    }
+        stage('Git Committer') {
+            steps {
+                echo 'Identifying Git Committer'
+                container('python39') {
+                    script {
+                        sh 'git config --global --add safe.directory ${WORKSPACE}'
+                        env.GIT_COMMIT_USER = sh(
+                            script: "git log -1 --pretty=format:'%an'",
+                            returnStdout: true
+                        ).trim()
+                    }
+                }
+            }
+        }
 
         stage('Surefire Report') {
             steps {
