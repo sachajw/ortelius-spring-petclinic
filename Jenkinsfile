@@ -20,19 +20,9 @@ pipeline {
                 containers:
                   - name: maven39
                     image: maven:3.9.9-amazoncorretto-8
-                    command:
-                      - /bin/sh
-                      - -c
-                      - >
-                          git config --global --add safe.directory ${SAFE_DIR} && sleep 99d
                     tty: true
                   - name: python39
                     image: python:3.9-slim
-                    command:
-                      - /bin/sh
-                      - -c
-                      - >
-                          git config --global --add safe.directory ${SAFE_DIR} && sleep 99d
                     tty: true
                   - name: kaniko
                     image: gcr.io/kaniko-project/executor:debug
