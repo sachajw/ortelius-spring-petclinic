@@ -56,8 +56,7 @@ pipeline {
 
         stage('Git Committer') {
             steps {
-                echo 'Identifying Git Committer'
-                container('python39') {
+                echo 'Identifying Git Committer' {
                     script {
                         sh 'git config --global --add safe.directory ${WORKSPACE}'
                         env.GIT_COMMIT_USER = sh(
