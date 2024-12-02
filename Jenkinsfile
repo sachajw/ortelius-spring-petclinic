@@ -42,5 +42,16 @@ pipeline {
               }
            }
         }
+        stage('Surefire Report') {
+            steps {
+                echo 'Generating Ortelius Report'
+                container("${MAVEN_CONTAINER}") {
+                    sh '''
+                        ./mvnw clean install site surefire-report:report
+                        tree
+                    '''
+                }
+            }
+        }
     }
 }
