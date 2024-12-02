@@ -23,7 +23,6 @@ pipeline {
                 labels:
                   app: build-pod
               spec:
-                serviceAccountName: jenkins
                 containers:
                   - name: maven39
                     image: maven:3.9.9-amazoncorretto-8
