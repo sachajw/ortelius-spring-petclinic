@@ -51,73 +51,8 @@ pipeline {
             steps {
                     withCredentials([string(credentialsId: 'gh-sachajw-walle-secret-text', variable: 'GITHUB_PAT')]) {
                     sh "git config --global --add safe.directory ${WORKSPACE} && git clone https://${GITHUB_PAT}@github.com/sachajw/ortelius-jenkins-demo-app.git"
-            }
-        }
-
-        stage('Git Committer') {
-            steps {
-                echo 'Identifying Git Committer'
-                }
-            }
-
-        stage('Surefire Report') {
-            steps {
-                container("${MAVEN_CONTAINER}") {
-                    sh '''
-                        ./mvnw clean install site surefire-report:report
-                        tree
-                    '''
-                }
-            }
-        }
-
-        stage('Ortelius') {
-            steps {
-                echo 'Ortelius'
-                container("${PYTHON_CONTAINER}") {
-                    sh '''
-                        pip install ortelius-cli
-                        rm -rf docker-hello-world-spring-boot
-                        git clone https://github.com/sachajw/ortelius-spring-petclinic.git
-                        cd ortelius-spring-petclinic
-                        dh envscript --envvars component.toml --envvars_sh ${WORKSPACE}/dhenv.sh
-                    '''
-                }
-            }
-        }
-
-        stage('Build and Push Docker Image') {
-            steps {
-                container("${KANIKO_CONTAINER}") {
-                    sh '''
-                        echo "Building Docker image ${DOCKERREPO}:${IMAGE_TAG}"
-                        docker build -t ${DOCKERREPO}:${IMAGE_TAG} .
-                        docker push ${DOCKERREPO}:${IMAGE_TAG}
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'target/site',
-                reportFiles: 'surefire.html',
-                reportName: 'Surefire Reports'
-            ])
-        }
-
-        always {
-            discordSend description: """
-                Result: ${currentBuild.currentResult}
-                Service: ${env.JOB_NAME}
-                Build Number: [#${env.BUILD_NUMBER}](${env.BUILD_URL})
-            """,
-            webhookURL: DISCORD_WEBHOOK
+              }
+           }
         }
     }
 }
