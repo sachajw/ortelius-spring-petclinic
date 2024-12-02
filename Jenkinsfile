@@ -47,7 +47,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 gitCheckout(
-                    branch: 'main',
+                    branch: 'master',
                     url: 'https://github.com/sachajw/ortelius-spring-petclinic.git'
                 )
             }
