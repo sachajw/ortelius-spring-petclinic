@@ -49,16 +49,8 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                script {
-                        sh "git config --global --add safe.directory ${WORKSPACE}"
-                        env.GIT_COMMIT_USER = sh(
-                            script: "git log -1 --pretty=format:'%an'",
-                            returnStdout: true
-                        ).trim()
-                    }
                     withCredentials([string(credentialsId: 'gh-sachajw-walle-secret-text', variable: 'GITHUB_PAT')]) {
-                        sh 'git clone https://${GITHUB_PAT}@github.com/sachajw/ortelius-jenkins-demo-app.git'
-                )
+                    sh "git config --global --add safe.directory ${WORKSPACE} && git clone https://${GITHUB_PAT}@github.com/sachajw/ortelius-jenkins-demo-app.git"
             }
         }
 
