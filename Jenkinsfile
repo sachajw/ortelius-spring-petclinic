@@ -79,7 +79,7 @@ pipeline {
         stage('Ortelius') {
             steps {
                 echo 'Ortelius'
-                container("${PYTHON_CONTAINER}") { // Replaced "${PYTHON_CONTAINER}" with 'python39'
+                container("${PYTHON_CONTAINER}") {
                     sh '''
                         pip install ortelius-cli
                         rm -rf docker-hello-world-spring-boot
