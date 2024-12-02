@@ -47,9 +47,18 @@ pipeline {
     }
 
     stages {
+        stage('Git Checkout') {
+            steps {
+                gitCheckout(
+                    branch: 'master',
+                    url: 'https://github.com/sachajw/ortelius-spring-petclinic.git'
+                )
+            }
+        }
+
         stage('Git Committer') {
             steps {
-                container("${PYTHON_CONTAINER}") {
+                echo 'Identifying Git Committer'
                     script {
                         sh "git config --global --add safe.directory ${WORKSPACE}"
                         env.GIT_COMMIT_USER = sh(
@@ -60,16 +69,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Git Checkout') {
-            steps {
-                gitCheckout(
-                    branch: 'master',
-                    url: 'https://github.com/sachajw/ortelius-spring-petclinic.git'
-                )
-            }
-        }
-
 
         stage('Surefire Report') {
             steps {
