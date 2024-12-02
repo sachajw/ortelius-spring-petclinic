@@ -28,4 +28,3 @@ jobs:
         run: |
           kubectl wait --for=condition=ready pod -l app=demo-db --timeout=180s
           kubectl wait --for=condition=ready pod -l app=petclinic --timeout=180s
-

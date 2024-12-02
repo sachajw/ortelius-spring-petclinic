@@ -1,56 +1,43 @@
-@Library('jenkins-shared-library@master') _
+@Library('jenkins-shared-library@master')
 
 pipeline {
     environment {
-        QUAYUSER = credentials('quay-pangarabbit')
-        QUAYPASS = credentials('quay-pangarabbit')
-        DOCKERREPO = 'quay.io'
-        DHUSER = credentials('dh-pangarabbit')
-        DHPASS = credentials('dh-pangarabbit')
-        DHORG = 'pangarabbit'
-        DHPROJECT = 'ortelius-jenkins-demo-app'
-        DHURL = 'https://ortelius.pangarabbit.com'
-        DISCORD = credentials('pangarabbit-discord-jenkins')
-        SAFE_DIR = '${env.WORKSPACE}'
-        REPORT_DIR = "${env.JENKINS_HOME}/reports"
+        DOCKERREPO = "quay.io/pangarabbit/ortelius-spring-petclinic"
+        IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
+        SAFE_DIR = "${env.WORKSPACE}"
+        DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
+        PYTHON_CONTAINER = 'python39'
+        MAVEN_CONTAINER = 'maven39'
+        KANIKO_CONTAINER = 'kaniko'
     }
 
     agent {
         kubernetes {
-            yaml '''
+            yaml """
               apiVersion: v1
               kind: Pod
               metadata:
                 name: build-pod
-                namespace: app
-                labels:
-                  app: build-pod
               spec:
                 containers:
                   - name: maven39
                     image: maven:3.9.9-amazoncorretto-8
-                    args: []
                     command:
                       - /bin/sh
                       - -c
                       - >
                           git config --global --add safe.directory ${SAFE_DIR} && sleep 99d
-                    securityContext:
-                      privileged: true
                     tty: true
                   - name: python39
                     image: python:3.9-slim
-                    args: []
                     command:
                       - /bin/sh
                       - -c
                       - >
                           git config --global --add safe.directory ${SAFE_DIR} && sleep 99d
-                    securityContext:
-                      privileged: true
                     tty: true
                 restartPolicy: Always
-            '''
+            """
         }
     }
 
@@ -63,13 +50,12 @@ pipeline {
                 )
             }
         }
-    }
+
         stage('Git Committer') {
             steps {
-                echo 'Identifying Git Committer'
-                container('python39') {
+                container("${PYTHON_CONTAINER}") {
                     script {
-                        sh 'git config --global --add safe.directory ${WORKSPACE}'
+                        sh "git config --global --add safe.directory ${WORKSPACE}"
                         env.GIT_COMMIT_USER = sh(
                             script: "git log -1 --pretty=format:'%an'",
                             returnStdout: true
@@ -81,8 +67,7 @@ pipeline {
 
         stage('Surefire Report') {
             steps {
-                echo 'Generating Ortelius Report'
-                container('maven39') {
+                container("${MAVEN_CONTAINER}") {
                     sh '''
                         ./mvnw clean install site surefire-report:report
                         tree
@@ -91,35 +76,28 @@ pipeline {
             }
         }
 
-        stage('Setup') {
+        stage('Ortelius') {
             steps {
-                echo 'Ortelius Setup'
-                container('python39') {
+                echo 'Ortelius'
+                container("${PYTHON_CONTAINER}") { // Replaced "${PYTHON_CONTAINER}" with 'python39'
                     sh '''
                         pip install ortelius-cli
                         rm -rf docker-hello-world-spring-boot
                         git clone https://github.com/dstar55/docker-hello-world-spring-boot
                         cd ortelius-spring-petclinic
                         dh envscript --envvars component.toml --envvars_sh ${WORKSPACE}/dhenv.sh
+                    '''
+                }
+            }
+        }
 
-                        echo Logging into Docker
-                        echo ${DHPASS} | docker login -u ${DHUSER} --password-stdin ${DHURL}
-
-                        echo Building and Pushing Docker Image
-                        . ${WORKSPACE}/dhenv.sh
-                        docker build --tag ${DOCKERREPO}:${IMAGE_TAG} .
+        stage('Build and Push Docker Image') {
+            steps {
+                container("${KANIKO_CONTAINER}") {
+                    sh '''
+                        echo "Building Docker image ${DOCKERREPO}:${IMAGE_TAG}"
+                        docker build -t ${DOCKERREPO}:${IMAGE_TAG} .
                         docker push ${DOCKERREPO}:${IMAGE_TAG}
-                        echo export DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${DOCKERREPO}:${IMAGE_TAG} | cut -d: -f2 | cut -c-12) >> ${WORKSPACE}/dhenv.sh
-
-                        echo Capturing SBOM
-                        . ${WORKSPACE}/dhenv.sh
-                        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .
-                        ./syft packages ${DOCKERREPO}:${IMAGE_TAG} --scope all-layers -o cyclonedx-json > ${WORKSPACE}/cyclonedx.json
-                        cat ${WORKSPACE}/cyclonedx.json
-
-                        echo Creating Component with Build Data and SBOM
-                        . ${WORKSPACE}/dhenv.sh
-                        dh updatecomp --rsp component.toml --deppkg "cyclonedx@${WORKSPACE}/cyclonedx.json"
                     '''
                 }
             }
@@ -128,7 +106,6 @@ pipeline {
 
     post {
         success {
-            echo 'Publishing HTML Report'
             publishHTML(target: [
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
@@ -140,22 +117,12 @@ pipeline {
         }
 
         always {
-            echo 'Sending Discord Notification'
-            withCredentials([string(credentialsId: 'pangarabbit-discord-jenkins', variable: 'DISCORD')]) {
-                discordSend description: """
-                                Result: ${currentBuild.currentResult}
-                                Service: ${env.JOB_NAME}
-                                Build Number: [#${env.BUILD_NUMBER}](${env.BUILD_URL})
-                                Branch: ${env.GIT_BRANCH}
-                                Commit User: ${env.GIT_COMMIT_USER}
-                                Duration: ${currentBuild.durationString}
-                            """,
-                            footer: 'Wall-E loves you!',
-                            link: env.BUILD_URL,
-                            result: currentBuild.currentResult,
-                            title: env.JOB_NAME,
-                            webhookURL: DISCORD
-            }
+            discordSend description: """
+                Result: ${currentBuild.currentResult}
+                Service: ${env.JOB_NAME}
+                Build Number: [#${env.BUILD_NUMBER}](${env.BUILD_URL})
+            """,
+            webhookURL: DISCORD_WEBHOOK
         }
     }
 }
