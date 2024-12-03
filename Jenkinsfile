@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
         SAFE_DIR = "${env.WORKSPACE}"
         DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
-        DEFAULT_CONTAINER = 'atlassian/default-image:4'
+        DEFAULT_CONTAINER = 'bbdefault'
         PYTHON_CONTAINER = 'python39'
         MAVEN_CONTAINER = 'maven39'
         KANIKO_CONTAINER = 'kaniko'
