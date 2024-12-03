@@ -37,8 +37,8 @@ pipeline {
                 echo 'Publishing Surefire HTML Report'
                 publishHTML(target: [
                 allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
+                alwaysLinkToLastBuild: false,
+                keepAll: false,
                 reportDir: 'target/site',
                 reportFiles: 'surefire-report.html',
                 reportName: 'Surefire Reports'
