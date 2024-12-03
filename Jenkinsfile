@@ -26,7 +26,7 @@ pipeline {
 
         stage('Surefire Report') {
             steps {
-                echo 'Generating Ortelius Report'
+                echo 'Generating Surefire Report'
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
                         #!/bin/bash
