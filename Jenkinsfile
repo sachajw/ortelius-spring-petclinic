@@ -31,7 +31,6 @@ pipeline {
                     sh '''
                         #!/bin/bash
                         apt update -y && apt install openjdk-17-jdk -y
-                        echo $JAVA_HOME && java -version
                         ./mvnw clean install site surefire-report:report
                         tree
                     '''
