@@ -9,8 +9,6 @@ pipeline {
         DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
         DEFAULT_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
-        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
