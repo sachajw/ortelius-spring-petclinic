@@ -29,6 +29,7 @@ pipeline {
                 echo 'Generating Ortelius Report'
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
+                        npm install
                         ./mvnw clean install site surefire-report:report
                         tree
                     '''
