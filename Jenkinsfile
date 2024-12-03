@@ -5,7 +5,6 @@ pipeline {
     environment {
         DOCKERREPO = 'quay.io/pangarabbit/ortelius-spring-petclinic'
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
-        SAFE_DIR = "${env.WORKSPACE}"
         DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
         DEFAULT_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
