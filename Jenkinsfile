@@ -41,7 +41,7 @@ pipeline {
                 alwaysLinkToLastBuild: false,
                 keepAll: false,
                 reportDir: 'target/site',
-                reportFiles: 'surefire-report.html',
+                reportFiles: 'surefire.html',
                 reportName: 'Surefire Reports'
             ])
         }
