@@ -26,10 +26,13 @@ pipeline {
 
         stage('Surefire Report') {
             steps {
-                echo 'Generating Surefire Report'
+                echo 'Surefire Report'
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
                         #!/bin/bash
+                        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+                        export PATH=$JAVA_HOME/bin:$PATH
+                        echo JAVA_HOME=$JAVA_HOME
                         apt update -y && apt install openjdk-17-jdk -y
                         ./mvnw clean install site surefire-report:report
                         tree
