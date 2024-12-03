@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
         SAFE_DIR = "${env.WORKSPACE}"
         DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
-        DEFAULT_CONTAINER = 'bbdefault'
+        DEFAULT_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
@@ -26,14 +26,8 @@ pipeline {
 
         stage('Surefire Report') {
             steps {
-                echo 'Surefire Report'
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
-                        #!/bin/bash
-                        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-                        export PATH=$JAVA_HOME/bin:$PATH
-                        echo JAVA_HOME=$JAVA_HOME
-                        apt update -y && apt install openjdk-17-jdk -y
                         ./mvnw clean install site surefire-report:report
                         tree
                     '''
