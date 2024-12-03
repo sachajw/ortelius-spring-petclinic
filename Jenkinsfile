@@ -2,9 +2,6 @@ pipeline {
     agent {
         label 'jenkins-jenkins-agent'
     }
-    tools {
-        jdk 'JDK17' // use the name defined in Global Tool Configuration
-    }
     environment {
         DOCKERREPO = 'quay.io/pangarabbit/ortelius-spring-petclinic'
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
@@ -32,6 +29,8 @@ pipeline {
                 echo 'Generating Ortelius Report'
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
+                        #!/bin/bash
+                        apt update -y && apt install openjdk-17-jdk -y
                         ./mvnw clean install site surefire-report:report
                         tree
                     '''
