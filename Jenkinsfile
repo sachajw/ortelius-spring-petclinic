@@ -3,6 +3,7 @@ pipeline {
         label 'jenkins-jenkins-agent'
     }
     environment {
+        GITHUB_PAT = credentials('gh-sachajw-walle-secret-text')
         DOCKERREPO = 'quay.io/pangarabbit/ortelius-spring-petclinic'
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
         DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
@@ -14,8 +15,9 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 container("${DEFAULT_CONTAINER}") {
-                    withCredentials([string(credentialsId: 'gh-sachajw-walle-secret-text', variable: 'GITHUB_PAT')]) {
-                        sh "git config --global --add safe.directory ${env.WORKSPACE} && git clone https://'${GITHUB_PAT}'@github.com/sachajw/ortelius-jenkins-demo-app.git"
+                    withCredentials([string(credentialsId: "${GITHUB_PAT}", variable: 'GITHUB_PAT')]) {
+                        sh "git config --global --add safe.directory ${env.WORKSPACE} && \
+                        git clone https://'${GITHUB_PAT}'@github.com/sachajw/ortelius-jenkins-demo-app.git"
                     }
                 }
             }
