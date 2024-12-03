@@ -32,7 +32,6 @@ pipeline {
                 }
             }
         }
-    }
 
         stage('Ortelius') {
             steps {
