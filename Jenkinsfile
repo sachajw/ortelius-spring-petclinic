@@ -8,7 +8,7 @@ pipeline {
         DISCORD = credentials('pangarabbit-discord-jenkins')
         DEFAULT_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
-        PYTHON_CONTAINER = 'python39'
+        PYTHON_CONTAINER = 'jnlp-agent-python3'
     }
 
     stages {
@@ -23,15 +23,15 @@ pipeline {
             }
         }
 
-        stage('Surefire Report') {
-            steps {
-                container("${DEFAULT_CONTAINER}") {
-                    sh '''
-                        ./mvnw clean install site surefire-report:report -Dcheckstyle.skip=true
-                    '''
-                }
-            }
-        }
+        // stage('Surefire Report') {
+        //     steps {
+        //         container("${DEFAULT_CONTAINER}") {
+        //             sh '''
+        //                 ./mvnw clean install site surefire-report:report -Dcheckstyle.skip=true
+        //             '''
+        //         }
+        //     }
+        // }
 
         stage('Ortelius') {
             steps {
