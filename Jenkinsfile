@@ -9,6 +9,8 @@ pipeline {
         DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
         DEFAULT_CONTAINER = 'bbdefault'
         KANIKO_CONTAINER = 'kaniko'
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -27,9 +29,9 @@ pipeline {
                 echo 'Generating Ortelius Report'
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
+                        #!/bin/bash
                         apt update -y && apt install openjdk-17-jdk -y
-                        echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
-                        source ~/.bashrc
+                        echo '$JAVA_HOME' && java-version
                         ./mvnw clean install site surefire-report:report
                         tree
                     '''
