@@ -8,6 +8,7 @@ pipeline {
         DISCORD = credentials('pangarabbit-discord-jenkins')
         DEFAULT_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
+        PYTHON_CONTAINER = 'python39'
     }
 
     stages {
@@ -35,7 +36,7 @@ pipeline {
 
         stage('Ortelius') {
             steps {
-                container("${DEFAULT_CONTAINER}") {
+                container("${PYTHON_CONTAINER}") {
                     sh '''
                         pip install ortelius-cli
                         dh envscript --envvars component.toml --envvars_sh ${WORKSPACE}/dhenv.sh
