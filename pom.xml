@@ -28,7 +28,7 @@
     </snapshotRepository>
   </distributionManagement> -->
 
-  <distributionManagement>
+  <!-- <distributionManagement>
     <repository>
       <id>verdaccio</id>
       <url>https://verdaccio.pangarabbit.com/</url>
@@ -37,7 +37,7 @@
       <id>verdaccio</id>
       <url>https://verdaccio.pangarabbit.com/</url>
     </snapshotRepository>
-  </distributionManagement>
+  </distributionManagement> -->
 
   <properties>
 
