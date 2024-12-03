@@ -16,7 +16,7 @@ pipeline {
             steps {
                 container("${DEFAULT_CONTAINER}") {
                     withCredentials([string(credentialsId: 'gh-sachajw-walle-secret-text', variable: 'GITHUB_PAT')]) {
-                        sh "git config --global --add safe.directory ${env.WORKSPACE} && git clone https://${GITHUB_PAT}@github.com/sachajw/ortelius-jenkins-demo-app.git"
+                        sh "git config --global --add safe.directory ${env.WORKSPACE} && git clone https://'${GITHUB_PAT}'@github.com/sachajw/ortelius-jenkins-demo-app.git"
                     }
                 }
             }
