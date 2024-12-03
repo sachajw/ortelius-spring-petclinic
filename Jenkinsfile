@@ -29,7 +29,8 @@ pipeline {
                 echo 'Generating Ortelius Report'
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
-                        npm install
+                        apt update -y && apt install openjdk-17-jdk -y
+                        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
                         ./mvnw clean install site surefire-report:report
                         tree
                     '''
