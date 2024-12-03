@@ -17,6 +17,17 @@
 
   <name>petclinic</name>
 
+  <distributionManagement>
+    <repository>
+      <id>verdaccio-repo</id>
+      <url>https://verdaccio.pangarabbit.com/repository/maven-releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>verdaccio-repo-snapshots</id>
+      <url>https://verdaccio.pangarabbit.com/repository/maven-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <properties>
 
     <!-- Generic properties -->
