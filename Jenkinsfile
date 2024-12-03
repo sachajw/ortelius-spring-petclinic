@@ -34,7 +34,7 @@ pipeline {
 
         post {
             success {
-                echo 'Publishing HTML Report'
+                echo 'Publishing Surefire HTML Report'
                 publishHTML(target: [
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
