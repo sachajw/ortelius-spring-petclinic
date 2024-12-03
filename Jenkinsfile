@@ -30,7 +30,7 @@ pipeline {
                 container("${DEFAULT_CONTAINER}") {
                     sh '''
                         apt update -y && apt install openjdk-17-jdk -y
-                        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+                        echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
                         ./mvnw clean install site surefire-report:report
                         tree
                     '''
