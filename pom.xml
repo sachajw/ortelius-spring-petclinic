@@ -321,6 +321,16 @@
 
   <repositories>
     <repository>
+      <id>verdaccio-repo</id>
+      <url>https://verdaccio.pangarabbit.com/maven</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
