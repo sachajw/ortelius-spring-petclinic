@@ -32,24 +32,25 @@ pipeline {
                 }
             }
         }
+    }
 
-        post {
-            success {
-                echo 'Publishing Surefire HTML Report'
-                publishHTML(target: [
+    post {
+        success {
+            echo 'Publishing Surefire HTML Report'
+            publishHTML(target: [
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: false,
                 reportDir: 'target/site',
                 reportFiles: 'surefire-report.html',
                 reportName: 'Surefire Reports'
-                ])
-            }
+            ])
+        }
 
-            always {
-                echo 'Sending Discord Notification'
-                withCredentials([string(credentialsId: "${DISCORD_WEBHOOK}", variable: 'DISCORD_WEBHOOK')]) {
-                    discordSend description: """
+        always {
+            echo 'Sending Discord Notification'
+            withCredentials([string(credentialsId: "${DISCORD_WEBHOOK}", variable: 'DISCORD_WEBHOOK')]) {
+                discordSend description: """
                                 Result: ${currentBuild.currentResult}
                                 Service: ${env.JOB_NAME}
                                 Build Number: [#${env.BUILD_NUMBER}](${env.BUILD_URL})
@@ -62,7 +63,6 @@ pipeline {
                             result: currentBuild.currentResult,
                             title: env.JOB_NAME,
                             webhookURL: DISCORD_WEBHOOK
-                }
             }
         }
     }
