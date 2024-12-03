@@ -8,8 +8,6 @@ pipeline {
         SAFE_DIR = "${env.WORKSPACE}"
         DISCORD_WEBHOOK = credentials('pangarabbit-discord-jenkins')
         DEFAULT_CONTAINER = 'bbdefault'
-        PYTHON_CONTAINER = 'python39'
-        MAVEN_CONTAINER = 'maven39'
         KANIKO_CONTAINER = 'kaniko'
     }
 
