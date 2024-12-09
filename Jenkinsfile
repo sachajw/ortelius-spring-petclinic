@@ -97,6 +97,7 @@ pipeline {
                 }
             }
         }
+    }
 
     //     stage('Ortelius') {
     //         steps {
