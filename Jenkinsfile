@@ -6,15 +6,15 @@ pipeline {
         DOCKERREPO = 'quay.io/pangarabbit/ortelius-spring-petclinic'
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
         DISCORD = credentials('pangarabbit-discord-jenkins')
-        DEFAULT_CONTAINER = 'agent-jdk17'
+        JDK17_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
-        PYTHON_CONTAINER = 'jnlp-agent-python3'
+        PYTHON_CONTAINER = 'python39'
     }
 
     stages {
         stage('Git Checkout') {
             steps {
-                container("${DEFAULT_CONTAINER}") {
+                container("${JDK17_CONTAINER}") {
                     withCredentials([string(credentialsId: 'gh-sachajw-walle-secret-text', variable: 'GITHUB_PAT')]) {
                         sh "git config --global --add safe.directory ${env.WORKSPACE} && \
                         git clone https://'${GITHUB_PAT}'@github.com/sachajw/ortelius-spring-petclinic.git"
@@ -25,7 +25,7 @@ pipeline {
 
         // stage('Surefire Report') {
         //     steps {
-        //         container("${DEFAULT_CONTAINER}") {
+        //         container("${JDK17_CONTAINER}") {
         //             sh '''
         //                 ./mvnw clean install site surefire-report:report -Dcheckstyle.skip=true
         //             '''
