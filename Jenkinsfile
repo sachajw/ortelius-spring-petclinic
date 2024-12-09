@@ -9,6 +9,12 @@ pipeline {
         JDK17_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
         PYTHON_CONTAINER = 'python39'
+        DHUSER = credentials('dh-pangarabbit')
+        DHPASS = credentials('dh-pangarabbit')
+        DHORG = "PangaRabbit"
+        DHPROJECT = "ortelius-spring-petclinic"
+        DHURL = "https://ortelius.pangarabbit.com"
+
     }
 
     stages {
