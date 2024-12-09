@@ -14,7 +14,6 @@ pipeline {
         DHORG = "PangaRabbit"
         DHPROJECT = "ortelius-jenkins-demo-app"
         DHURL = "https://ortelius.pangarabbit.com"
-
     }
 
     stages {
