@@ -57,26 +57,6 @@ pipeline {
                     }
                 }
 
-                container('kaniko') {
-                    script {
-                        // Step 3: Build and push Docker image using Kaniko
-                        echo 'Building and pushing Docker image with Kaniko'
-                        sh '''
-                            . ${WORKSPACE}/dhenv.sh
-                            /kaniko/executor \
-                                --context . \
-                                --dockerfile Dockerfile \
-                                --destination ${DOCKERREPO}:${IMAGE_TAG}
-                        '''
-
-                        // Step 4: Export Docker image digest
-                        echo 'Exporting Docker image digest'
-                        sh '''
-                            echo export DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${DOCKERREPO}:${IMAGE_TAG} | cut -d: -f2 | cut -c-12) >> ${WORKSPACE}/dhenv.sh
-                        '''
-                    }
-                }
-
                 container("${PYTHON_CONTAINER}") {
                     script {
                         // Step 5: Capture SBOM
@@ -98,8 +78,27 @@ pipeline {
                 }
             }
         }
-    }
+                        container('kaniko') {
+                    script {
+                        // Step 3: Build and push Docker image using Kaniko
+                        echo 'Building and pushing Docker image with Kaniko'
+                        sh '''
+                            . ${WORKSPACE}/dhenv.sh
+                            /kaniko/executor \
+                                --context . \
+                                --dockerfile Dockerfile \
+                                --destination ${DOCKERREPO}:${IMAGE_TAG}
+                        '''
 
+                        // Step 4: Export Docker image digest
+                        echo 'Exporting Docker image digest'
+                        sh '''
+                            echo export DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${DOCKERREPO}:${IMAGE_TAG} | cut -d: -f2 | cut -c-12) >> ${WORKSPACE}/dhenv.sh
+                        '''
+                    }
+                }
+             }
+    }
     //     stage('Ortelius') {
     //         steps {
     //             container("${PYTHON_CONTAINER}") {
