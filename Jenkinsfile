@@ -12,8 +12,8 @@ pipeline {
         DHUSER = credentials('dh-pangarabbit')
         DHPASS = credentials('dh-pangarabbit')
         DHORG = "PangaRabbit"
-        DHPROJECT = "ortelius-jenkins-demo-app"
-        DHURL = "https://ortelius.pangarabbit.com"
+        DHPROJECT = "ortelius-spring-petclinic"
+        DHURL = "https://console.deployhub.com"
     }
 
     stages {
