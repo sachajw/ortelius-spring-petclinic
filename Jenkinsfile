@@ -30,46 +30,46 @@ pipeline {
             }
         }
 
-        stage('Build and Push Docker Image') {
+        // stage('Surefire Report') {
+        //     steps {
+        //         container("${JDK17_CONTAINER}") {
+        //             sh '''
+        //                 ./mvnw clean install site surefire-report:report -Dcheckstyle.skip=true
+        //                '''
+        //         }
+        //     }
+        // }
+
+        stage('Ortelius') {
             steps {
-                container("${KANIKO_CONTAINER}") {
+                container("${PYTHON_CONTAINER}") {
                     script {
-                        echo 'Building and pushing Docker image with Kaniko'
                         sh '''
+                            pip install ortelius-cli
+                            #dh envscript --envvars component.toml --envvars_sh ${WORKSPACE}/dhenv.sh
+                            #dh --dhurl https://ortelius.pangarabbit.com --dhuser admin --dhpass admin envscript --envvars component.toml --envvars_sh dhenv.sh
+                            dh --dhurl https://console.deployhub.com --dhuser stella99 --dhpass 123456 envscript --envvars component.toml --envvars_sh dhenv.sh
+
+                            . ${WORKSPACE}/dhenv.sh
+                            curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .
+                            ./syft packages ${DOCKERREPO}:${IMAGE_TAG} --scope all-layers -o cyclonedx-json > ${WORKSPACE}/cyclonedx.json
+                            cat ${WORKSPACE}/cyclonedx.json
+
+                            . ${WORKSPACE}/dhenv.sh
+                            dh updatecomp --rsp component.toml --deppkg "cyclonedx@${WORKSPACE}/cyclonedx.json"
+                           '''
+                    }
+                }
+
+                container('kaniko') {
+                    script {
+                        sh '''
+                            . ${WORKSPACE}/dhenv.sh
                             /kaniko/executor \
                                 --context . \
                                 --dockerfile Dockerfile \
                                 --destination ${DOCKERREPO}:${IMAGE_TAG}
-                        '''
-                    }
-                }
-            }
-        }
-
-        stage('Capture SBOM') {
-            steps {
-                container("${PYTHON_CONTAINER}") {
-                    script {
-                        echo 'Installing Ortelius CLI and Capturing SBOM'
-                        sh '''
-                            pip install ortelius-cli
-                            curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .
-                            ./syft packages ${DOCKERREPO}:${IMAGE_TAG} --scope all-layers -o cyclonedx-json > cyclonedx.json
-                        '''
-                    }
-                }
-            }
-        }
-
-        stage('Ortelius Update') {
-            steps {
-                container("${PYTHON_CONTAINER}") {
-                    script {
-                        echo 'Updating Ortelius Component with SBOM'
-                        sh '''
-                            dh --dhurl ${DHURL} --dhuser ${DHUSER} --dhpass ${DHPASS} updatecomp \
-                                --rsp component.toml \
-                                --deppkg "cyclonedx@${WORKSPACE}/cyclonedx.json"
+                            echo export DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${DOCKERREPO}:${IMAGE_TAG} | cut -d: -f2 | cut -c-12) >> ${WORKSPACE}/dhenv.sh
                         '''
                     }
                 }
