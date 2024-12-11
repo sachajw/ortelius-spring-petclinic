@@ -3,7 +3,7 @@ pipeline {
         label 'jenkins-jenkins-agent'
     }
     environment {
-        DOCKERREPO = 'quay.io/pangarabbit/ortelius-spring-petclinic'
+        DOCKERREPO = 'springcommunity/spring-petclinic-vets-service'
         IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
         DISCORD = credentials('pangarabbit-discord-jenkins')
         JDK17_CONTAINER = 'agent-jdk17'
@@ -53,7 +53,7 @@ pipeline {
 
                             . ${WORKSPACE}/dhenv.sh
                             curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .
-                            ./syft packages ${DOCKERREPO}:${IMAGE_TAG} --scope all-layers -o cyclonedx-json > ${WORKSPACE}/cyclonedx.json
+                            ./syft scan ${DOCKERREPO}:${IMAGE_TAG} --scope all-layers -o cyclonedx-json > ${WORKSPACE}/cyclonedx.json
                             cat ${WORKSPACE}/cyclonedx.json
 
                             . ${WORKSPACE}/dhenv.sh
