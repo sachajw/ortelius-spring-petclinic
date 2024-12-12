@@ -9,11 +9,11 @@ pipeline {
         JDK17_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
         PYTHON_CONTAINER = 'python39'
-        DHUSER = 'admin'
-        DHPASS = 'admin'
+        DHUSER = 'walle'
+        DHPASS = 'Whimsical-Claim-Selective6'
         DHORG = "PangaRabbit"
         DHPROJECT = "ortelius-spring-petclinic"
-        DHURL = "https://console.deployhub.com"
+        DHURL = "https://ortelius.pangarabbit.com" //"https://console.deployhub.com"
     }
 
     stages {
@@ -48,8 +48,8 @@ pipeline {
                             git config --global --add safe.directory /home/jenkins/agent/workspace/t_ortelius-spring-petclinic_main
                             pip install ortelius-cli
                             #dh envscript --envvars component.toml --envvars_sh ${WORKSPACE}/dhenv.sh
-                            #dh --dhurl https://ortelius.pangarabbit.com --dhuser walle --dhpass Whimsical-Claim-Selective6 envscript --envvars component.toml --envvars_sh dhenv.sh
-                            dh --dhurl https://console.deployhub.com --dhuser stella99 --dhpass 123456 envscript --envvars component.toml --envvars_sh dhenv.sh
+                            dh --dhurl https://ortelius.pangarabbit.com --dhuser walle --dhpass Whimsical-Claim-Selective6 envscript --envvars component.toml --envvars_sh dhenv.sh
+                            #dh --dhurl https://console.deployhub.com --dhuser stella99 --dhpass 123456 envscript --envvars component.toml --envvars_sh dhenv.sh
 
                             . ${WORKSPACE}/dhenv.sh
                             curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .
