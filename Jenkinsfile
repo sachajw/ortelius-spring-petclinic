@@ -3,7 +3,7 @@ pipeline {
         label 'jenkins-jenkins-agent'
     }
     environment {
-        IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
+        //IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT.substring(0, 7)}"
         DISCORD = credentials('pangarabbit-discord-jenkins')
         JDK17_CONTAINER = 'agent-jdk17'
         KANIKO_CONTAINER = 'kaniko'
