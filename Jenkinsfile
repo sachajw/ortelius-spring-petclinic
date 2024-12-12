@@ -45,7 +45,6 @@ pipeline {
                 container("${PYTHON_CONTAINER}") {
                     script {
                         sh '''
-                            dig ortelius.pangarabbit.com
                             git config --global --add safe.directory /home/jenkins/agent/workspace/t_ortelius-spring-petclinic_main
                             pip install ortelius-cli
                             #dh envscript --envvars component.toml --envvars_sh ${WORKSPACE}/dhenv.sh
@@ -60,19 +59,6 @@ pipeline {
                             . ${WORKSPACE}/dhenv.sh
                             dh updatecomp --rsp component.toml --deppkg "cyclonedx@${WORKSPACE}/cyclonedx.json"
                            '''
-                    }
-                }
-
-                container('kaniko') {
-                    script {
-                        sh '''
-                            . ${WORKSPACE}/dhenv.sh
-                            /kaniko/executor \
-                                --context . \
-                                --dockerfile Dockerfile \
-                                --destination ${DOCKERREPO}:${IMAGE_TAG}
-                            echo export DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${DOCKERREPO}:${IMAGE_TAG} | cut -d: -f2 | cut -c-12) >> ${WORKSPACE}/dhenv.sh
-                        '''
                     }
                 }
             }
