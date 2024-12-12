@@ -47,7 +47,7 @@ pipeline {
 
                             . ${WORKSPACE}/dhenv.sh
                             curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .
-                            ./syft scan . --scope all-layers -o cyclonedx-json > ${WORKSPACE}/cyclonedx.json
+                            ./syft scan . --source-name ortelius-spring-petclinic --scope all-layers -o cyclonedx-json > ${WORKSPACE}/cyclonedx.json
                             cat ${WORKSPACE}/cyclonedx.json
 
                             . ${WORKSPACE}/dhenv.sh
